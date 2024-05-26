@@ -4,6 +4,6 @@ import { nodePolyfills } from "vite-plugin-node-polyfills";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: "/",
+  base: "/first_contract_front_end/",
   plugins: [react(), nodePolyfills()],
 });
