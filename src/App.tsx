@@ -60,6 +60,15 @@ function App() {
           Show Alert
         </a>
 
+
+        <a
+          onClick={() => {
+            showAlert();
+          }}
+        >
+          Show Alert
+        </a>
+
         <br />
 
         {connected && (
