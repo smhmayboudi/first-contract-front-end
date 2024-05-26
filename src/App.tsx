@@ -1,34 +1,46 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
 import "./App.css";
+import { TonConnectButton } from "@tonconnect/ui-react";
+import { useMainContract } from "./hooks/useMainContract";
+// import { useTonConnect } from "./hooks/useTonConnect";
+import "@twa-dev/sdk";
 
 function App() {
-  const [count, setCount] = useState(0);
+  // const { connected } = useTonConnect();
+  const {
+    contract_address,
+    counter_value,
+    recent_sender,
+    owner_address,
+    contract_balance,
+  } = useMainContract();
 
   return (
-    <>
+    <div>
       <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+        <TonConnectButton />
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
+      <div>
+        <div className='Card'>
+          <b>Our contract Address</b>
+          <div className='Hint'>{contract_address?.slice(0, 30) + "..."}</div>
+          <b>Our contract Balance</b>
+          <div className='Hint'>{contract_balance}</div>
+        </div>
+        <div className='Card'>
+          <b>Counter Value</b>
+          <div>{counter_value ?? "Loading..."}</div>
+        </div>
+        <div className='Card'>
+          <b>Recent Sender</b>
+          <div>{recent_sender?.toString()}</div>
+        </div>
+        <div className='Card'>
+          <b>Owner Address</b>
+          <div>{owner_address?.toString()}</div>
+        </div>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    </div>
+
   );
 }
 
