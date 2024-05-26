@@ -22,7 +22,7 @@ export function useMainContract() {
   const mainContract = useAsyncInitialize(async () => {
     if (!client) return;
     const contract = new MainContract(
-      Address.parse("EQCYva8_rA71FYQFePAwtTLEVfhwhoW0Nyw-ZuBqdWT-CMyC")
+      Address.parse("EQCYva8_rA71FYQFePAwtTLEVfhwhoW0Nyw-ZuBqdWT-CMyC"),
     );
     return client.open(contract) as OpenedContract<MainContract>;
   }, [client]);
@@ -39,6 +39,8 @@ export function useMainContract() {
         owner_address: val.owner_address,
       });
       setBalance(number);
+      await sleep(5000);
+      getValue();
     }
     getValue();
   }, [mainContract]);
@@ -47,5 +49,8 @@ export function useMainContract() {
     contract_address: mainContract?.address.toString(),
     contract_balance: balance,
     ...contractData,
+    sendIncrement: () => {
+      return mainContract?.sendIncrement(sender, toNano("0.05"), 5);
+    },
   };
 }
