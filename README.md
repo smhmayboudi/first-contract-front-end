@@ -31,4 +31,6 @@ export default {
 
 # References
 
+https://github.com/klauss-z/func_course
+
 https://github.com/markokhman/first_contract_front_end
